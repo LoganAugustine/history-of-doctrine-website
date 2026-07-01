@@ -385,9 +385,9 @@ header h1 em{font-style:italic;color:var(--gold2)}
   <div class="hcredit">Lecture notes by<br><strong>Dr. John D. Hannah</strong><br>Lessons 5&ndash;13</div>
 </header>
 <div class="dtabs">
-  <button class="dtab" onclick="switchDoctrine('bibliology')">Bibliology</button>
-  <button class="dtab active" onclick="switchDoctrine('trinity')">Trinitarianism - Theology Proper</button>
-  <button class="dtab" onclick="switchDoctrine('christology')">Christology - The Person of Christ</button>
+  <button class="dtab" onclick="switchDoctrine('bibliology')">The Scriptures - Bibliology</button>
+  <button class="dtab active" onclick="switchDoctrine('trinity')">Theology Proper - Trinitarianism</button>
+  <button class="dtab" onclick="switchDoctrine('christology')">The Person of Christ - Christology</button>
   <button class="dtab dim">The Work of Christ</button>
   <button class="dtab dim">Sin and Grace</button>
   <button class="dtab dim">Ecclesiology - The Church</button>
@@ -1280,7 +1280,7 @@ function openFigureModal(slug){
   document.getElementById("figModalDates").textContent = fig.dates;
   document.getElementById("figModalDesc").textContent = fig.descriptor;
 
-  const bodyHtml = fig.doctrines.map(d => {
+  const bodyHtml = fig.doctrines.filter(d => d.doctrine !== "soteriology").map(d => {
     const meta = DOCTRINE_META[d.doctrine] || { label: d.doctrine, color:"#888" };
     const jumpBtns = '';
     return `<div class="fig-doctrine-block">
@@ -1367,6 +1367,11 @@ Object.assign(GL, GL_SOTERIOLOGY);
 
 // ─── BIBLIOLOGY GLOSSARY ──────────────────────────────────────────────────────
 const GL_BIBLIOLOGY = {
+  "Dogma": "From Greek dokein ('it seems'), a decree or decision. In the NT, attached to the findings of an ecclesiastical body (Acts 16:4). Technically, the study of confessional statements formally adopted by a church body — closed at Nicea II (787) for Eastern Orthodoxy, Vatican II/1992 for Rome, the Formula of Concord (1580) for Lutherans, and Dordt/Westminster (1619/1649) for the Reformed.",
+  "Doctrine": "From Greek didaskalia (1 Tim. 4:16), 'teaching.' What is held or put forth as true by a teacher, school, or group — broader than dogma, which denotes only teaching formally confessionalized by the church. Non-confessional traditions (e.g. Baptists) have doctrines but not dogma.",
+  "History of Doctrine": "The discipline tracing the gradual development of theological thought from the post-apostolic age to its creedal formulation. Of recent (18th-century) German origin; Semler (1762) is credited as its father, Muenscher as father of its modern form.",
+  "Historical-Analytical Method": "A method of studying doctrine that segments church history into periods (Ancient, Medieval, Reformation, Modern) as the organizing framework for the branches of Systematic Theology. Rejected by Hannah as disjointed, repetitive, and insufficiently historical.",
+  "Synthetic-Historical Method": "The method Hannah's course follows: tracing each branch of systematic theology individually through the entire history of the church, rather than sorting doctrines by historical period. Assumes a working knowledge of general church history.",
   "Canon": "From Greek kanōn (measuring rod). The officially recognized collection of books regarded as Holy Scripture. The word was first used technically by Athanasius in his Festal Letter of 367 AD to denote the 27 NT books.",
   "Inspiration": "The doctrine that God so superintended the biblical writers that the resulting text is both fully human and fully the Word of God. Classical formulation: verbal-plenary — extending to the very words (verbal) and to every part (plenary) of Scripture.",
   "Verbal-Plenary Inspiration": "The view that inspiration extends to the very words (verbal) chosen by the biblical writers and to all parts of Scripture without exception (plenary). Held by Justin Martyr, Athenagoras, Irenaeus, Augustine, and the Protestant Reformers.",
@@ -2202,6 +2207,49 @@ const SOTERIOLOGY_ERAS = [
 ];
 
 const BIBLIOLOGY_ERAS = [
+// ─── ERA 0: PROLEGOMENA (LESSON 1) ────────────────────────────────────────────
+{
+  id:"b_prolegomena", name:"Prolegomena: Terms & Method", dates:"Lesson 1", color:"#4a4a52", icon:"§",
+  summary:"Before any doctrine can be traced historically, Hannah first clarifies what the discipline itself is. 'Dogma' and 'doctrine' are not synonyms; the course pursues a specific method (synthetic-historical over historical-analytical); and the discipline of tracing doctrine historically is itself a recent, largely German, eighteenth-century invention. Hannah: 'A word is in order at the beginning of our course to clearly capture these fundamental concepts.'",
+  concepts:["Dogma","Doctrine","Historical-Analytical Method","Synthetic-Historical Method","History of Doctrine"],
+  events:[
+    {
+      id:"b_dogma_doctrine", date:"Lesson 1", title:"Dogma vs. Doctrine", sub:"The Terms Defined",
+      type:"development", tags:["development"],
+      sum:"Dogma derives from the Greek dokein ('it seems') and denotes a decree, decision, or command — in the NT it attaches to the findings of an ecclesiastical body (Acts 16:4; Luke 2:1; Acts 17:7; Eph. 2:15; Didache 2:3). Seeburg: dogma 'designates either an ecclesiastical doctrine or the entire structure of such doctrines... the church expects acknowledgment of it by her members.' Technically, dogma is the study of confessional statements — doctrine's development from the post-apostolic age to its final creedal formulation. Each tradition considers its dogma 'closed' at a different point: Eastern Orthodoxy at Nicea II (787 AD, admitting no further refinement); Rome at Vatican II (1963–65) or the 1992 Catechism; the Lutheran church at the Formula of Concord (1580); the Reformed church at Dordt (1619) and Westminster (1649). Doctrine (didaskalia, 1 Tim. 4:16), by contrast, is almost universally translated 'teaching' — what is held or put forth as true by a teacher, school, or group, whether or not it has been formally confessionalized. Hannah's course covers both: 'the study of creeds, but beyond the creeds to further doctrinal formulations.'",
+      shift:"Establishes the vocabulary for the entire course. Confessional churches (Reformed, Lutheran, Roman) possess dogma; non-confessional churches (Baptists and similar traditions, which recognize no ecumenical councils as binding) possess only doctrines.",
+      quotes:[
+        {t:"The theological term, dogma, designates either an ecclesiastical doctrine or the entire structure of such doctrines.", s:"Seeburg, The History of Doctrine, 19"},
+        {t:"The name dogma is applied to the crystallized statements which were received by the church.", s:"Heick, A History of Christian Thought, I, 3"}
+      ],
+      sig:{c:"Gives the course a precise vocabulary from the outset — distinguishing formally confessionalized doctrine (dogma) from the broader stream of theological teaching (doctrine).", l:"The line between the two is not always sharp in practice, and confessional 'closing dates' are themselves a matter of ecclesiastical self-definition rather than neutral historical fact."},
+      terms:["Dogma","Doctrine"]
+    },
+    {
+      id:"b_two_methods", date:"Lesson 1", title:"Two Methods of Study", sub:"Historical-Analytical vs. Synthetic-Historical",
+      type:"development", tags:["development"],
+      sum:"Two methods have been applied to the History of Doctrine. (1) The Historical-Analytical Method divides the field into General/Synthetic and Special/Analytic history, using the periods of church history (Ancient, Medieval, Reformation, Modern) as the organizing framework for the seven branches of Systematic Theology. Hannah rejects it for three reasons: it makes doctrine disjointed ('anatomic rather than organic'), suffering loss of continuity as 'history swallows doctrine'; it necessitates avoidable repetition; and, most importantly, it does not admit a strictly historical treatment of the subject. (2) The Synthetic-Historical Method instead traces each branch of systematic theology individually through the entire history of the church, assuming a working knowledge of church history and focusing on the development of each doctrine across time. This is the method the course follows: 'The stress in our course is doctrine, then history.' Two clarifications follow from this choice: Systematic Theology and dogma were developed by the church but not created by it — 'development supposes existing materials; creation supposes none' — and development in history is not automatically synonymous with improvement, which can run in either a positive or negative direction.",
+      shift:"Sets the organizing logic for the entire course: each doctrine (Scripture, God, Christ...) will be traced individually across the full sweep of church history, rather than church history being used as a container into which doctrines are sorted period by period.",
+      quotes:[
+        {t:"Development supposes existing materials; creation supposes none. The terms are mutually exclusive.", s:"Hannah, Lesson 1, Lecture Notes"}
+      ],
+      sig:{c:"Preserves the organic, continuous development of a single doctrine as the primary object of study, rather than fragmenting it across historical periods.", l:"Requires the student to already possess a working knowledge of general church history, since that framework is assumed rather than taught directly."},
+      terms:["Historical-Analytical Method","Synthetic-Historical Method"]
+    },
+    {
+      id:"b_historiography", date:"Lesson 1", title:"Origins of the Discipline", sub:"18th-Century Germany to the Americans",
+      type:"development", tags:["development","figure"],
+      sum:"The History of Doctrine as a distinct discipline is of recent origin — the eighteenth century. Johannes S. Semler, a German church historian and biblical critic, first demonstrated in 1762 that the History of Doctrine should be separated from general ecclesiastical history; Tholuck called him 'the father of the history of doctrines.' Wilhelm Muenscher, Semler's disciple and a theologian of the Enlightenment, is called by Heick 'the Father of the Modern History of Dogma' for his four-volume Handbuch der Christliches Dogmengeschichte (1797–1809). German scholars have dominated the field since: Neander (d. 1857), Hagenbach (d. 1840), Baumgarten-Crusius (d. 1832), Engelhardt (d. 1839), and Adolph Harnack — 'the giant in the field' — whose seven-volume History of Dogma located the origin of dogma in early church 'Hellenism.' Loofs, Seeburg, and Wiegand carried the German tradition into the early twentieth century. Five Americans stand out: William G. T. Shedd (1889), H. C. Sheldon (1886), George Park Fisher (1886), Arthur Cushman McGiffert (1932–33, a follower of Harnack's approach), and Otto W. Heick (1965). Hannah notes that the English produced no standard works in the field, though the Scottish Free Church's William Cunningham deserves mention for his Historical Theology (1862).",
+      shift:"Situates the entire course within a specific, recent, and largely German scholarly tradition — the History of Doctrine is not an ancient discipline but an Enlightenment-era invention, which shapes both its strengths (rigor, periodization) and its inherited biases (Harnack's Hellenization thesis in particular).",
+      quotes:[
+        {t:"The father of the history of doctrines.", s:"Tholuck, on Semler"},
+        {t:"The Father of the Modern History of Dogma.", s:"Heick, on Muenscher, A History of Christian Thought, I, 6"}
+      ],
+      sig:{c:"Traces a clear scholarly lineage from Semler through Harnack to the Americans, giving the student a map of who's who when a source is cited later in the course.", l:"The discipline's German origins carry Harnack's Hellenization thesis and other Enlightenment-era assumptions into its very foundations — assumptions the course will repeatedly need to evaluate rather than simply inherit."},
+      terms:["History of Doctrine"]
+    }
+  ]
+},
 // ─── ERA 1: ANCIENT CHURCH ────────────────────────────────────────────────────
 {
   id:"b_ancient", name:"Ancient Church", dates:"c. 90–430 AD", color:"#2a5080", icon:"✝",
@@ -3341,12 +3389,13 @@ function renderFiguresTab(){
   };
 
   const cards = sorted.map(([slug, fig]) => {
-    const dots = fig.doctrines.map(d => {
+    const shownDoctrines = fig.doctrines.filter(d => d.doctrine !== "soteriology");
+    const dots = shownDoctrines.map(d => {
       const m = docMeta[d.doctrine] || {label: d.doctrine, color:"#888"};
       return `<span title="${m.label}" style="display:inline-block;width:10px;height:10px;border-radius:50%;background:${m.color};flex-shrink:0"></span>`;
     }).join("");
 
-    const docLabels = fig.doctrines.map(d => {
+    const docLabels = shownDoctrines.map(d => {
       const m = docMeta[d.doctrine] || {label: d.doctrine, color:"#888"};
       return `<span style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:${m.color};background:${m.color}18;border:1px solid ${m.color}44;border-radius:3px;padding:1px 6px">${m.label}</span>`;
     }).join("");
@@ -3387,8 +3436,8 @@ let currentEras = ERAS;
 const ALL_DOCTRINE_ERAS = [
   { key: "trinity",     label: "Trinitarianism", eras: ERAS              },
   { key: "christology", label: "Christology",    eras: CHRISTOLOGY_ERAS  },
-  { key: "soteriology", label: "Soteriology",    eras: SOTERIOLOGY_ERAS  },
   { key: "bibliology",  label: "Bibliology",     eras: BIBLIOLOGY_ERAS   },
+  // soteriology intentionally withheld from search — content for next exam, data preserved in SOTERIOLOGY_ERAS
 ];
 
 const DOCTRINE_COLORS = {
